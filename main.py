@@ -1,6 +1,5 @@
 import telebot
 import os
-import schedule
 import time
 import threading
 from keep_alive import keep_alive
@@ -19,9 +18,6 @@ except ValueError:
     raise ValueError("FATAL ERROR: ADMIN_USER_ID must be a valid integer.")
 
 bot = telebot.TeleBot(API_TOKEN)
-
-# This dictionary tracks users who have already received a file.
-user_usage = {}
 
 # --- File Storage ---
 # Using non-sequential, randomized keys to prevent users from guessing the next part.
@@ -68,7 +64,7 @@ FILES = {
 }
 
 
-# --- Auto-Delete and Daily Reset Schedulers ---
+# --- Auto-Delete Scheduler ---
 
 def schedule_message_deletion(chat_id, message_id):
     """Waits 10 minutes and then deletes the specified message."""
@@ -79,27 +75,14 @@ def schedule_message_deletion(chat_id, message_id):
     except Exception as e:
         print(f"Could not delete message {message_id} from chat {chat_id}: {e}")
 
-def reset_user_sessions():
-    """Resets the user usage dictionary daily."""
-    global user_usage
-    print("--- SCHEDULER: Resetting all user sessions... ---")
-    user_usage = {}
-    print("--- SESSIONS CLEARED ---")
-
-schedule.every().day.at("00:00", "UTC").do(reset_user_sessions)
-
-def run_scheduler():
-    """Runs the daily reset scheduler in a background thread."""
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
+# Note: The daily reset scheduler functions (reset_user_sessions, run_scheduler)
+# and related imports/threads have been removed.
 
 # --- Bot Command Handlers ---
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    user_id = message.from_user.id
+    # Removed user_id tracking
     args = message.text.split()
 
     if len(args) == 1:
@@ -112,20 +95,17 @@ def handle_start(message):
         bot.reply_to(message, "❌ Invalid or expired file link.")
         return
 
-    if user_id in user_usage:
-        bot.reply_to(message, "❌ You have already claimed your one file for this session.")
-        return
+    # Removed the check: if user_id in user_usage: ...
 
     send_files_and_finalize(message, file_key)
 
 
 def send_files_and_finalize(message, file_key):
     """Sends one or more files, adds warnings, and schedules deletion for each."""
-    user_id = message.from_user.id
+    # Removed user_id tracking from the start of this function
     chat_id = message.chat.id
 
-    if user_id in user_usage: # Final check
-        return
+    # Removed the final check: if user_id in user_usage: ...
 
     try:
         file_id_list = FILES[file_key].get('file_ids', [])
@@ -150,8 +130,8 @@ def send_files_and_finalize(message, file_key):
             deletion_thread.start()
             time.sleep(1) # Prevents Telegram from rate-limiting the bot
 
-        user_usage[user_id] = True
-        bot.send_message(chat_id, "✅ All files have been sent. Access is now complete.")
+        # Removed the line: user_usage[user_id] = True
+        bot.send_message(chat_id, "✅ All files have been sent.") # Simplified final message
 
     except Exception as e:
         print(f"Error in send_files_and_finalize for key {file_key}: {e}")
@@ -174,10 +154,7 @@ def get_file_id(message):
 if __name__ == "__main__":
     print("🤖 Bot is starting...")
     keep_alive() # Starts the Flask web server in a thread
-    scheduler_thread = threading.Thread(target=run_scheduler)
-    scheduler_thread.daemon = True
-    scheduler_thread.start()
-    print("✔️ Daily reset scheduler started.")
+    # Removed the scheduler_thread start
     print("✔️ Bot is now polling for messages.")
     bot.infinity_polling(timeout=10, long_polling_timeout=5)
 
