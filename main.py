@@ -60,6 +60,38 @@ FILES = {
     "got_s8p1_wS5kD7": { "file_ids": ["FILE_ID_FOR_S8_EP1", "FILE_ID_FOR_S8_EP2"] },
     "got_s8p2_xT4jC6": { "file_ids": ["FILE_ID_FOR_S8_EP3", "FILE_ID_FOR_S8_EP4"] },
     "got_s8p3_yU3iB5": { "file_ids": ["FILE_ID_FOR_S8_EP5", "FILE_ID_FOR_S8_EP6"] },
+
+    # ---- 720p ----
+
+"st_s5p1_720p_rX3k5": {
+  "file_ids": ["BQACAgUAAxkBAAOwaShfAdF8QLI7eewjQEYjFOE28JwAAnoXAAJY40FVSwpxiIf7X-82BA"]
+},
+"st_s5p2_720p_tY4l6": {
+  "file_ids": ["BQACAgUAAxkBAAOvaShfAbfukgSQ1ox_Cdh48tpe3tsAAngXAAJY40FV58C3cOLk3qQ2BA"]
+},
+"st_s5p3_720p_uZ5m7": {
+  "file_ids": ["BQACAgUAAxkBAAOuaShfAa2RuOTL1cRhJ80PQCLNXdUAAnQXAAJY40FVXxGEqQJlV3E2BA"]
+},
+"st_s5p4_720p_vA6n8": {
+  "file_ids": ["BQACAgUAAxkBAAOtaShfAV3Rjc883D5ailbs9-pEj2gAAnIXAAJY40FVuBDZ38m4ByM2BA"]
+},
+
+
+# ---- 1080p ----
+
+"st_s5p1_1080p_rX3k5": {
+  "file_ids": ["BQACAgUAAxkBAAOoaShVyxZOKS8kPBjjQ3eT3pPHs6YAAqUWAAJY40FVF_FUM6ftOF02BA"]
+},
+"st_s5p2_1080p_tY4l6": {
+  "file_ids": ["BQACAgUAAxkBAAOnaShVyyGsPYJPTP9UcZZF1pJXG9UAAp8WAAJY40FVSa0lmBNkh542BA"]
+},
+"st_s5p3_1080p_uZ5m7": {
+  "file_ids": ["BQACAgUAAxkBAAOmaShVy4RfX-HjrJWsUba3KhZl3SQAAp0WAAJY40FVxdSnQYGT0mc2BA"]
+},
+"st_s5p4_1080p_vA6n8": {
+  "file_ids": ["BQACAgUAAxkBAAOlaShVy8c9tyQYEaUGOs64N8qSBE0AApgWAAJY40FVUgxKazmczIo2BA"]
+}
+
 }
 
 
